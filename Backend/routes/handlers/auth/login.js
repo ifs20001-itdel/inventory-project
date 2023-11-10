@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
     }
 
     const token = jwt.sign({data}, 'secretKey', {
-        expiresIn: "1d"
+        expiresIn: "24h"
     })
 
     return res.json({token});

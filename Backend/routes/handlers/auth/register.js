@@ -12,15 +12,15 @@ module.exports = async (req, res)=>{
     });
 
     // Check is email has used
-    const isEmailUsed = await User.findOne({
-        email: body.email
-    })
+    // const isEmailUsed = await User.findOne({
+    //     email: body.email
+    // })
 
-    if(isEmailUsed){
-        return res.status(400).json({
-            message: "Email has been used"
-        })
-    }
+    // if(isEmailUsed){
+    //     return res.status(400).json({
+    //         message: "Email has been used"
+    //     })
+    // }
 
 
 
