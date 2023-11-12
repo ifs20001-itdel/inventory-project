@@ -32,7 +32,8 @@ module.exports = async (req, res) => {
     const data = {
         id: user.id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role,
     }
 
     const token = jwt.sign({data}, 'secretKey', {

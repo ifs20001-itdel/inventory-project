@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     const body = req.body;
 
     // Validation User Input
-    if (!body.name_product)
+    if (!body.name_product || !body.stock || !body.amount)
         return res.status(400).json({
             message: "Name product must be provided"
         });
