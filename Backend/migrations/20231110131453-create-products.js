@@ -9,10 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // id_user: {
-      //   type: Sequelize.INTEGER,
-      //   references: 'users', 
-      //   referencesKey: 'id' 
+      name_version: {
+        type: Sequelize.STRING
+      },
+      name_user: {
+        type: Sequelize.STRING
+      },
+      // name_version: {
+      //   type: Sequelize.STRING,
+      //   references: {
+      //     model: {
+      //       tableName: "versions",
+      //     },
+      //     key: "name"
+      //   },
       // },
       name_product: {
         type: Sequelize.STRING

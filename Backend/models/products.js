@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const versions = require('./versions');
+const User = require('./user')
 module.exports = (sequelize, DataTypes) => {
   class products extends Model {
     /**
@@ -15,7 +17,23 @@ module.exports = (sequelize, DataTypes) => {
   }
   products.init({
     name_product: DataTypes.STRING,
-    // id_user : DataTypes.INTEGER,
+    
+    name_version : {
+      type:DataTypes.STRING,
+      references: {
+        model: versions,
+        key: "name_version"
+      }
+    },  
+      
+    name_user : {
+      type:DataTypes.STRING,
+      references: {
+        model: User,
+        key: "name"
+      }
+    },
+    // name_version: DataTypes.STRING,
     stock: DataTypes.INTEGER,
     amount: DataTypes.INTEGER
   }, {
