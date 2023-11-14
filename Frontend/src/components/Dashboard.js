@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { Link } from 'react-router-dom';
+
 
 const Dashboard = () => {
   return (
@@ -35,14 +37,16 @@ const Dashboard = () => {
               </p>
             </div>
 
-            {/* Inventory Management Section */}
             <div className="columns is-centered mt-5">
               <div className="column is-two-thirds">
-                <div className="box has-background-grey-lighter has-text-dark">
-                  <p className="title">Inventory Status</p>
-                  <p className="subtitle">View and manage your inventory</p>
-                  {/* Add relevant inventory management components here */}
-                </div>
+                {/* Gunakan Link dari React Router */}
+                <Link to="/product">
+                  <div className="box has-background-grey-lighter has-text-dark">
+                    <p className="title">Inventory Status</p>
+                    <p className="subtitle">View and manage your inventory</p>
+                    {/* Add relevant inventory management components here */}
+                  </div>
+                </Link>
               </div>
             </div>
 

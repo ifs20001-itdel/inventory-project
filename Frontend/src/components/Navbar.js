@@ -34,9 +34,9 @@ const Navbar = () => {
 
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
-                        <a className="navbar-item">
+                        <Link className="navbar-item" to="/dashboard">
                             Home
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="navbar-end">
