@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import Product from './components/crudProduct/Product';
 import AddProduct from './components/crudProduct/AddProduct';
 import EditProduct from './components/crudProduct/EditProduct';
+import DetailProduct from './components/crudProduct/DetailProduct'
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Route path="product/add" element={<AddProduct />} />
         {/* Rute default, arahkan ke halaman AddProduct */}
         <Route path="product/edit/:id" element={<EditProduct />} />
+        
+        <Route path="product/detail/:id" element={<DetailProduct />} />
       </Routes>
     </BrowserRouter>
   );

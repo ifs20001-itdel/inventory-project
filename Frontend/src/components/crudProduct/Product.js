@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         fetchProducts();
@@ -30,55 +31,87 @@ const Product = () => {
         }
     };
 
+    const fetchProductById = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                return;
+            }
+
+            const response = await axios.get(`http://localhost:5000/products/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            setSelectedProduct(response.data);
+        } catch (error) {
+            console.error(`Error fetching product with ID ${id}:`, error);
+        }
+    };
+
     const deleteProduct = async (id) => {
         try {
             await axios.delete(`http://localhost:5000/products/${id}`);
-            setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
+            setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
         } catch (error) {
             console.log(error);
         }
     };
-    
+
+    const showProductDetails = (product) => {
+        setSelectedProduct(product);
+    };
 
     return (
         <section>
             <Navbar />
             <div className="columns mt-5 is-centered">
                 <div className="column mx-8 mb-4">
-                    <Link to={`add`} className="button is-success">
-                        Add New
-                    </Link>
-                    <table className="table">
+                    {/* Displaying the list of products in a table */}
+                    <table className="table is-fullwidth">
                         <thead>
                             <tr>
-                                <th className="px-4 py-2">No</th>
-                                <th className="px-4 py-2">Version</th>
-                                <th className="px-4 py-2">User</th>
-                                <th className="px-4 py-2">Product</th>
-                                <th className="px-4 py-2">Stock</th>
-                                <th className="px-4 py-2">Amount</th>
-                                <th className="px-4 py-2">Created At</th>
-                                <th className="px-4 py-2">Action</th>
+                                <th>Name</th>
+                                <th>Version</th>
+                                <th>User</th>
+                                <th>Stock</th>
+                                <th>Amount</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {products.map((product, index) => (
                                 <tr key={index}>
-                                    <td className="px-4 py-2">{index + 1}</td>
-                                    <td className="px-4 py-2">{product.name_version}</td>
-                                    <td className="px-4 py-2">{product.name_user}</td>
-                                    <td className="px-4 py-2">{product.name_product}</td>
-                                    <td className="px-4 py-2">{product.stock}</td>
-                                    <td className="px-4 py-2">{product.amount}</td>
-                                    <td className="px-4 py-2">{product.createdAt}</td>
-                                    <td className="px-4 py-2">
-                                        <button onClick={() => deleteProduct(product.id)} className="button is-small is-danger"> Delete </button>
-                                        <Link to={`edit/${product.id}`} className="button is-small is-info mr-2">Edit</Link>
+                                    <td>{product.name_product}</td>
+                                    <td>{product.name_version}</td>
+                                    <td>{product.name_user}</td>
+                                    <td>{product.stock}</td>
+                                    <td>{product.amount}</td>
+                                    <td>{product.createdAt}</td>
+                                    <td>
+                                        <button onClick={() => showProductDetails(product)} className="button is-info">Details</button>
+                                        <button onClick={() => deleteProduct(product.id)} className="button is-danger">Delete</button>
+                                        <Link to={`edit/${product.id}`} className="button is-info">Edit</Link>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+
+                    {/* Code Untuk menampilkan Detail nya */}
+                    {selectedProduct && (
+                        <div>
+                            <h2>Product Details</h2>
+                            <p>Version: {selectedProduct.name_version}</p>
+                            <p>User: {selectedProduct.name_user}</p>
+                            <p>Stock: {selectedProduct.stock}</p>
+                            <p>Amount: {selectedProduct.amount}</p>
+                            <p>Created At: {selectedProduct.createdAt}</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
