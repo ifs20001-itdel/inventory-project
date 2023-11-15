@@ -44,7 +44,6 @@ const Dashboard = () => {
                   <div className="box has-background-grey-lighter has-text-dark">
                     <p className="title">Inventory Status</p>
                     <p className="subtitle">View and manage your inventory</p>
-                    {/* Add relevant inventory management components here */}
                   </div>
                 </Link>
               </div>
@@ -56,7 +55,6 @@ const Dashboard = () => {
                 <div className="box has-background-grey-lighter has-text-dark">
                   <p className="title">CD Playstation Info</p>
                   <p className="subtitle">Explore CD Playstation details</p>
-                  {/* Add relevant CD Playstation components here */}
                 </div>
               </div>
             </div>

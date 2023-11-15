@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
@@ -29,11 +30,24 @@ const Product = () => {
         }
     };
 
+    const deleteProduct = async (id) => {
+        try {
+            await axios.delete(`http://localhost:5000/products/${id}`);
+            setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+
     return (
         <section>
             <Navbar />
             <div className="columns mt-5 is-centered">
-                <div className="column is-10">
+                <div className="column mx-8 mb-4">
+                    <Link to={`add`} className="button is-success">
+                        Add New
+                    </Link>
                     <table className="table">
                         <thead>
                             <tr>
@@ -58,8 +72,8 @@ const Product = () => {
                                     <td className="px-4 py-2">{product.amount}</td>
                                     <td className="px-4 py-2">{product.createdAt}</td>
                                     <td className="px-4 py-2">
-                                        <button className="button is-danger is-small px-3 py-1">Delete</button>
-                                        <button className="button is-success is-small px-3 py-1 ml-3">Edit</button>
+                                        <button onClick={() => deleteProduct(product.id)} className="button is-small is-danger"> Delete </button>
+                                        <Link to={`edit/${product.id}`} className="button is-small is-info mr-2">Edit</Link>
                                     </td>
                                 </tr>
                             ))}

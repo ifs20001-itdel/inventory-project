@@ -1,60 +1,44 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 const Navbar = () => {
-    const navigate = useNavigate(); // Menggunakan useNavigate
+  const navigate = useNavigate();
 
-    const Logout = async () => {
-        try {
-            await axios.delete('http://localhost:5000/auth/logout');
-            // Menggunakan navigate untuk navigasi
-            navigate("/");
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    return (
-        <nav className="navbar" role="navigation" aria-label="main navigation">
-            <div className='container'>
+  // Function to handle logout
+  const handleLogout = async () => {
+    try {
+      navigate('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
-                <div className="navbar-brand">
-                    <Link className="navbar-item" to="/dashboard">
-                        <img src="/logo.png" alt="Logo" className='image is-64x64' />
-                    </Link>
+  return (
+    // Navbar
+    <nav className="bg-transparent p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
+        <div className="flex items-center">
+          <img src="/logo.png" alt="Logo" className="w-20 h-10 mr-2" />
+        </div>
 
-                    <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-
-                <div id="navbarBasicExample" className="navbar-menu">
-                    <div className="navbar-start">
-                        <Link className="navbar-item" to="/dashboard">
-                            Home
-                        </Link>
-                    </div>
-
-                    <div className="navbar-end">
-                        <div className="navbar-item">
-                            <div className="buttons">
-                                {/* <a className="button is-primary">
-                  <strong>Sign up</strong>
-                </a> */}
-                                <a onClick={Logout} className="button is-light">
-                                    Log Out
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    )
+        {/* Navigation Links */}
+        <ul className="flex space-x-4 justify-center">
+          <li><Link to="/dashboard" className="text-white">Home</Link></li>
+          <li><Link to="/product" className="text-white">Products</Link></li>
+          <li><a href="#" className="text-white">About</a></li>
+          <li><a href="#" className="text-white">Contact</a></li>
+        </ul>
+        
+        {/* Logout Link */}
+        <ul className="flex space-x-4">
+          <li><a href="#" className="text-white" onClick={handleLogout}>Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
