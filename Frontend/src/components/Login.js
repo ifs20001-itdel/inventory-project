@@ -17,10 +17,13 @@ const Login = () => {
                 email: email,
                 password: password
             });
-
+    
             const token = response.data.token;
             console.log('Token:', token);
-
+    
+            // Store the token in localStorage
+            localStorage.setItem('token', token);
+    
             navigate("/dashboard");
         } catch (error) {
             console.error(error);
@@ -29,6 +32,7 @@ const Login = () => {
             }
         }
     };
+    
 
     const navigateToRegister = () => {
         navigate("/register");

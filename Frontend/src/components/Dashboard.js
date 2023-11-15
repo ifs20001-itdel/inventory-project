@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { Link } from 'react-router-dom';
-
 
 const Dashboard = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [inventoryData, setInventoryData] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/products')
+      .then(response => {
+        console.log('Data from API:', response.data);
+        setInventoryData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching inventory data:', error);
+      });
+  }, []);
+
+  const filteredInventory = inventoryData.filter((item) => {
+    const includesSearchTerm = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+    console.log(`Item: ${item.name}, Search Term: ${searchTerm}, Result: ${includesSearchTerm}`);
+    return includesSearchTerm;
+  });
+
   return (
     <div>
       <section className="hero is-primary is-fullheight">
@@ -25,6 +44,8 @@ const Dashboard = () => {
                   className="input is-medium is-rounded"
                   type="text"
                   placeholder="Search..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </p>
               <p className="control">
@@ -37,17 +58,22 @@ const Dashboard = () => {
               </p>
             </div>
 
-            <div className="columns is-centered mt-5">
-              <div className="column is-two-thirds">
-                {/* Gunakan Link dari React Router */}
-                <Link to="/product">
+            {/* Render hasil pencarian */}
+            {filteredInventory.map((item) => (
+              <div key={item.id} className="columns is-centered mt-5">
+                <div className="column is-two-thirds">
                   <div className="box has-background-grey-lighter has-text-dark">
-                    <p className="title">Inventory Status</p>
-                    <p className="subtitle">View and manage your inventory</p>
+                    <p className="title">{item.name}</p>
+                    {/* Tambahkan info lainnya sesuai kebutuhan */}
+                    <p>Version: {item.version}</p>
+                    <p>User: {item.user}</p>
+                    <p>Stock: {item.stock}</p>
+                    <p>Amount: {item.amount}</p>
+                    <p>Created At: {item.createdAt}</p>
                   </div>
-                </Link>
+                </div>
               </div>
-            </div>
+            ))}
 
             {/* CD Playstation Section */}
             <div className="columns is-centered mt-5">

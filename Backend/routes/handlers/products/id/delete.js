@@ -1,17 +1,28 @@
-const { products } = require("../../../../models")
+const { products } = require("../../../../models");
+const verifyToken = require("../../../../middlewares/verify-token");
 
 module.exports = async (req, res) => {
-    const { productId } = req.params;
-    const product = await products.findByPk(productId);
+    try {
+        // Memanggil middleware untuk memverifikasi token dan peran pengguna
+        await verifyToken(req, res, async () => {
+            const { productId } = req.params;
+            const product = await products.findByPk(productId);
 
-    if (!product)
-        return res.status(404).json({
-            success: false,
-            message: "products not found"
+            if (!product)
+                return res.status(404).json({
+                    success: false,
+                    message: "Product not found"
+                });
+
+            await product.destroy();
+            return res.json({
+                message: "OK",
+            });
         });
-
-    await product.destroy();
-    return res.json({
-        message: "OK",
-    })
-}
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+        });
+    }
+};

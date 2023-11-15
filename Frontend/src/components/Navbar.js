@@ -30,6 +30,7 @@ const Navbar = () => {
           <li><Link to="/product" className="text-white">Products</Link></li>
           <li><a href="#" className="text-white">About</a></li>
           <li><a href="#" className="text-white">Contact</a></li>
+          <li><a href="https://kelompok-sipaling.vercel.app/" className="text-white">Team</a></li>
         </ul>
         
         {/* Logout Link */}
