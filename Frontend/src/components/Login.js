@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/login.css'
-import loginImg from '../assest/pexels-ehsan-ahmadnejad-1371985.jpg';
+import loginImg from '../assest/ps4Controller.jpg';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -49,7 +49,6 @@ const Login = () => {
                                 type="text"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="your email"
                             />
                         </div>
                         <div className="flex flex-col text-gray-400 py-2">
@@ -59,7 +58,6 @@ const Login = () => {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="********"
                             />
                         </div>
                         <button className="w-full my-2 py-2 bg-blue-500 shadow-lg shadow-blue-500/50 hover:shadow-blue-500/40 text-white font-semibold rounded-lg" onClick={navigateToRegister}>Go to Register</button>
