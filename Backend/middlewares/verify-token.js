@@ -28,6 +28,7 @@ module.exports = async (req, res, next) => {
             });
         }
 
+        // 
         req.user = data.data;
 
         // Supervisor dapat mengakses semuanya

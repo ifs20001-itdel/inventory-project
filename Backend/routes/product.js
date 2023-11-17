@@ -6,8 +6,9 @@ const productIdHandler = require('./handlers/products/id')
 
 router.route('/')
     .get(verifyToken, productHandler.get)
-    .post(verifyToken, productHandler.post)
 
+router.route('/add')
+    .post(verifyToken, productHandler.post)
 
 
 router

@@ -7,6 +7,7 @@ import Product from './components/crudProduct/Product';
 import AddProduct from './components/crudProduct/AddProduct';
 import EditProduct from './components/crudProduct/EditProduct';
 import DetailProduct from './components/crudProduct/DetailProduct'
+import LogActivity from './components/crudProduct/LogActivity';
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
         <Route index element={<Login />} />
         {/* Rute default, arahkan ke halaman product */}
         <Route path="/product" element={<Product />} />
+
+        <Route path="/logactivity" element={<LogActivity />} />
+
         {/* Rute default, arahkan ke halaman AddProduct */}
         <Route path="product/add" element={<AddProduct />} />
         {/* Rute default, arahkan ke halaman AddProduct */}

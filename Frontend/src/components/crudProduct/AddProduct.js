@@ -1,43 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const AddProduct = () => {
   const [Version, setVersion] = useState("");
-  const [User, setUser] = useState("");
   const [Product, setProduct] = useState("");
   const [Stock, setStock] = useState("");
-  const [Amount, setAmount] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Di sini, kita ambil dan cetak token setiap kali komponen dipasang
+    const token = localStorage.getItem("token");
+    console.log("Token:", token);
+    console.log(jwtDecode(token))
+
+
+    // Jika Anda perlu melakukan sesuatu dengan token setiap kali halaman baru dimuat, Anda dapat melakukannya di sini.
+  }, []); // Array kosong menandakan bahwa efek ini hanya berjalan saat komponen dipasang (seperti componentDidMount).
 
   const createProduct = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
-  
+      const token = localStorage.getItem("token");
+      console.log("Token:", token);
+
       if (!token) {
-        // Handle the case where the token is missing or invalid
-        console.error('Token is missing or invalid');
+        console.error("Token is missing or invalid");
         return;
       }
-  
-      await axios.post("http://localhost:5000/products", {
-        name_version: Version,
-        name_user: User,
-        name_product: Product,
-        stock: Stock,
-        amount: Amount,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+
+      await axios.post(
+        "http://localhost:5000/products",
+        {
+          versionId: Version,
+          productName: Product,
+          qty: Stock,
         },
-      });
-  
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       navigate("/product");
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
     }
   };
+  
   
 
   return (
@@ -57,19 +69,6 @@ const AddProduct = () => {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="user">
-            User
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="user"
-            type="text"
-            placeholder="Name User"
-            value={User}
-            onChange={(e) => setUser(e.target.value)}
-          />
-        </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="product">
@@ -96,20 +95,6 @@ const AddProduct = () => {
             placeholder="Stock"
             value={Stock}
             onChange={(e) => setStock(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
-            Amount
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="amount"
-            type="text"
-            placeholder="Amount"
-            value={Amount}
-            onChange={(e) => setAmount(e.target.value)}
           />
         </div>
 

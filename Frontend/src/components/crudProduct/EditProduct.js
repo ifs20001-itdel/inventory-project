@@ -46,8 +46,6 @@ const EditProduct = () => {
     }
   };
   
-  
-
   return (
     <div className="columns mt-5 is-centered">
       <div className="column is-half">

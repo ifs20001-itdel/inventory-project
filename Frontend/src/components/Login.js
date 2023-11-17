@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [msg, setMsg] = useState('');
     const navigate = useNavigate();
-
+    
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
@@ -32,6 +32,7 @@ const Login = () => {
             }
         }
     };
+    
     
 
     const navigateToRegister = () => {

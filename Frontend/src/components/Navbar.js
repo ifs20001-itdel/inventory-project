@@ -9,11 +9,13 @@ const Navbar = () => {
   // Function to handle logout
   const handleLogout = async () => {
     try {
+      localStorage.removeItem("token")
       navigate('/');
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
+
 
   return (
     // Navbar

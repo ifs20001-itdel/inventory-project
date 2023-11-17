@@ -1,14 +1,14 @@
-const { versions } = require("../../../../models")
+const { Version } = require("../../../../models")
 
 module.exports = async (req, res) => {
     const { versionId } = req.params;
-    const version = await versions.findByPk(versionId);
+    const data = await Version.findByPk(versionId);
 
-    if (!version)
+    if (!data)
         return res.status(404).json({
             success: false,
             message: "versions not found"
         });
 
-    return res.json(version)
+    return res.json(data)
 }

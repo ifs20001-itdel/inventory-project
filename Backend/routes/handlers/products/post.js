@@ -1,18 +1,19 @@
-const { products } = require('../../../models')
+const { Product } = require('../../../models')
 
 module.exports = async (req, res) => {
 
     const body = req.body;
+    console.log(req.user)
 
     // Validation User Input
-    if (!body.name_product || !body.stock || !body.amount)
+    if (!body.versionId || !body.userId || !body.product_name)
         return res.status(400).json({
-            message: "Name , stock and amount product must be provided"
+            message: "Name Product data must be provided"
         });
 
-    // Check is name product has used
-    // const isNameProductUsed = await products.findOne({
-    //     name_product: body.name_product
+    // Check is name data has used
+    // const isNameProductUsed = await Product.findOne({
+    //     name_data: body.name_data
     // })
 
     // if (isNameProductUsed) {
@@ -21,7 +22,7 @@ module.exports = async (req, res) => {
     //     })
     // }
 
-    const product = await products.create(body);
+    const data = await Product.create(body);
 
-    return res.json(product)
+    return res.json(data)
 }

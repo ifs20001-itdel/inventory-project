@@ -5,23 +5,23 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('versions', [
       {
-        name_version: 'Playstation 1',
+        nameVersion: 'Playstation 1',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_version: 'Playstation 2',
+        nameVersion: 'Playstation 2',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_version: 'Playstation 3',
+        nameVersion: 'Playstation 3',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_version: 'Playstation 4',
+        nameVersion: 'Playstation 4',
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_version: 'Playstation 5',
+        nameVersion: 'Playstation 5',
         createdAt: new Date(),
         updatedAt: new Date()
       },

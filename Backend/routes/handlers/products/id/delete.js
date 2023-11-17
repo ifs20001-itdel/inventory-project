@@ -1,4 +1,4 @@
-const { products } = require("../../../../models");
+const { Product } = require("../../../../models");
 const verifyToken = require("../../../../middlewares/verify-token");
 
 module.exports = async (req, res) => {
@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         // Memanggil middleware untuk memverifikasi token dan peran pengguna
         await verifyToken(req, res, async () => {
             const { productId } = req.params;
-            const product = await products.findByPk(productId);
+            const product = await Product.findByPk(productId);
 
             if (!product)
                 return res.status(404).json({

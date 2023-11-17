@@ -1,8 +1,8 @@
-const { products } = require("../../../models")
+const { Product } = require("../../../models")
 
-// GET all products data
+// GET all Product data
 
 module.exports = async (req, res)=>{
-  const product = await products.findAll();
-  return res.json(product)
+  const data = await Product.findAll();
+  return res.json(data)
 };
