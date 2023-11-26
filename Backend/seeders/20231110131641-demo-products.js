@@ -5,51 +5,39 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('products', [
       {
-        name_product: 'Tekken 3',
-        name_version: 'Playstation 1',
-        name_user: 'Naruto Uzumaki',
-        stock: 10,
-        amount: 10,
+        productName: 'Dragon Ball',
+        versionId: 4,
+        keterangan: "Uncheck",
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_product: 'Jackie Chan Stuntmaster',
-        name_version: 'Playstation 1',
-        name_user: 'Naruto Uzumaki',
-        stock: 10,
-        amount: 10,
+        productName: 'Jackie Chan Stuntmaster',
+        versionId: 2,
+        keterangan: "Uncheck",
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_product: 'Crash Bandicot',
-        name_version: 'Playstation 1',
-        name_user: 'Naruto Uzumaki',
-        stock: 10,
-        amount: 10,
+        productName: 'Crash Bandicot',
+        versionId: 1,
+        keterangan: "Check",
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_product: 'CTR Crash Team Racing',
-        name_version: 'Playstation 1',
-        name_user: 'Naruto Uzumaki',
-        stock: 10,
-        amount: 10,
+        productName: 'CTR Crash Team Racing',
+        versionId: 1,
+        keterangan: "Check",
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_product: 'Digimon World 3',
-        name_version: 'Playstation 1',
-        name_user: 'Naruto Uzumaki',
-        stock: 10,
-        amount: 10,
+        productName: 'Digimon World 3',
+        versionId: 1,
+        keterangan: "Check",
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name_product: 'WWF Smackdown 2',
-        name_version: 'Playstation 1',
-        name_user: 'Naruto Uzumaki',
-        stock: 10,
-        amount: 10,
+        productName: 'WWF Smackdown 2',
+        versionId: 1,
+        keterangan: "Check",
         createdAt: new Date(),
         updatedAt: new Date()
       },

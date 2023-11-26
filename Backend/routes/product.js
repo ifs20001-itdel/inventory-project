@@ -6,16 +6,16 @@ const productIdHandler = require('./handlers/products/id')
 
 router.route('/')
     .get(verifyToken, productHandler.get)
-
-router.route('/add')
     .post(verifyToken, productHandler.post)
 
+router.route('/management')
+    .post(verifyToken, productHandler.managementStok)
 
 router
 .route("/:productId")
-  .get(productIdHandler.get)
-  .put(productIdHandler.put)
-  .delete(productIdHandler.delete);
+  .get(verifyToken, productIdHandler.get)
+  .put(verifyToken, productIdHandler.put)
+  .delete(verifyToken, productIdHandler.delete);
 
 module.exports = router;
 

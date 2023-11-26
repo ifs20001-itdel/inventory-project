@@ -1,4 +1,4 @@
-const { Product } = require("../../../../models");
+const { Product, Version, User, Log } = require("../../../../models");
 const verifyToken = require("../../../../middlewares/verify-token");
 
 module.exports = async (req, res) => {
@@ -6,18 +6,21 @@ module.exports = async (req, res) => {
         // Memanggil middleware untuk memverifikasi token dan peran pengguna
         await verifyToken(req, res, async () => {
             const { productId } = req.params;
-            const product = await Product.findByPk(productId);
+            const product = await Product.findByPk(productId, {
+                include: [Version, User, Log],
+            });
 
             if (!product)
                 return res.status(404).json({
                     success: false,
                     message: "Product not found"
                 });
-
+            await Log.destroy({ where: { productId } });
             await product.destroy();
             return res.json({
-                message: "OK",
-            });
+                success: true,
+                message: "Product deleted successfully",
+              });
         });
     } catch (error) {
         console.error(error);

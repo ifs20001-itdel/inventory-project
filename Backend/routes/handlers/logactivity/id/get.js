@@ -1,8 +1,8 @@
-const { logs } = require("../../../../models")
+const { Log } = require("../../../../models")
 
 module.exports = async (req, res) => {
-    const { logId } = req.params;
-    const log = await logs.findByPk(logId);
+    const { id } = req.params;
+    const log = await Log.findByPk(id);
 
     if (!log)
         return res.status(404).json({
